@@ -16,7 +16,7 @@ class Collection{
     Collection();
     Collection(const Collection&);
     
-    int getActualQuantity()const;  //no se le puse un set porque es una variable de control interna
+    int getActualQuantity()const;  //no  le puse un set porque es una variable de control interna
 
     Product* searchProduct(const std:: string&); //para objetos no constantes que quiero modificaar 
     const Product* searchProduct( const std:: string & )const;  //Para objetos que si son constantes
@@ -28,6 +28,7 @@ class Collection{
     std:: string toString() const; 
 
 };
+
 
 
 #endif // __COLLECTION_HPP__
