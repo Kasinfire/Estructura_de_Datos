@@ -1,11 +1,7 @@
-#include <iostream>
-
 #include "menu.hpp"
-int main()
-{
-    Menu menu; 
-    menu.runMenu();
-    return 0; 
+
+int main(){
+    new Menu(*new List<Song,50>);
 }
 
 

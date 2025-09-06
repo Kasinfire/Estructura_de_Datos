@@ -1,7 +1,8 @@
 #ifndef __SONG_HPP__
 #define __SONG_HPP__
 
-#include <string>
+#include <string> // para cadenas
+#include <iostream> // para operadores >> y <<
 
 struct SongParams{
     std:: string title;  
@@ -37,6 +38,9 @@ class Song {
     void setRanking(const int&);
 
     Song& operator = (const Song&);
+
+    friend std::ostream& operator << (std::ostream&,const Song&);
+    friend std::istream& operator >> (std:: istream&, Song&);
 
 
 };

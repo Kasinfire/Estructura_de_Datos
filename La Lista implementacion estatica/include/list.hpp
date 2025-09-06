@@ -1,8 +1,9 @@
 #ifndef __LIST_HPP__
 #define __LIST_HPP__
 
-#include <string>
-#include <exception>
+#include <string> // para cadenas 
+#include <exception> // para la clase exception
+#include <iostream> //Para los operadores >> y <<
 
 
 //Definicion 
@@ -10,11 +11,11 @@
 template <class T, int ARRAYSIZE>
 class List {
  private:
-  T data[ARRAYSIZE];
-  int last;
+    T data[ARRAYSIZE];
+    int last;
 
-  bool isValidPos(const int&) const;
-  void copyAll(const List<T, ARRAYSIZE>&);
+    bool isValidPos(const int&) const;
+    void copyAll(const List<T, ARRAYSIZE>&);
 
  public:
 
@@ -34,7 +35,7 @@ class List {
             virtual const char* what() const noexcept {
                 return msg.c_str();
             }
-    };
+};
 
 
   List();                           // inicialización
@@ -59,6 +60,12 @@ class List {
   void deleteAll();
 
   List<T, ARRAYSIZE>& operator=(const List<T, ARRAYSIZE>&);
+   
+  template <class T2, int SIZE>
+  friend std::ostream& operator << (std::ostream&, const List<T2, SIZE>&);
+  
+  template <class T3, int SIZE2>
+  friend std::istream& operator >> (std:: istream&, List<T3,SIZE2>&);
 };
 
 
@@ -201,7 +208,44 @@ template <class T, int ARRAYSIZE>
 List<T, ARRAYSIZE>& List<T, ARRAYSIZE>::operator=(
     const List<T, ARRAYSIZE>& other) {
   this->copyAll(other);
-  return *this;
+  return *this;  
 }
+
+
+/*Esta funcion recorre cada elemento de la lista y lo escribre en el flujo
+de salida os separandolo con salto de linea.RETORNA FLUJO  */
+
+template <class T2, int SIZE>
+ostream& operator << (ostream& os, const List<T2,SIZE>& l){
+    int i(0);
+    while (i <= l.last) {
+        os << l.data[i++]<<endl;
+    }
+    return os; 
+}
+  
+/*Le los elementos del flujo de ENTRADA is y los agrega a la lista mientras haya espacio
+Si ecurre un error se captura la excepcion y de finalizala lectura.*/
+
+template <class T3, int SIZE2>
+istream& operator >> (istream& is, List<T3,SIZE2>& l){
+
+    T3 myObject;
+
+    try{
+    while(is>>myObject){
+        if(!l.isFull()){
+             l.data[++l.last] = myObject;
+             }
+        }
+    }catch(const invalid_argument& e){
+        
+    }
+    return is;
+
+}
+
+
+
 
 #endif  // __LIST_HPP__
