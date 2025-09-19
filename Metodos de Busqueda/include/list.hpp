@@ -78,12 +78,6 @@ class List {
 
 };
 
-
-
-
-
-
-
 // Implementación
 
 using namespace std;
@@ -346,6 +340,7 @@ int List<T, ARRAYSIZE>:: findDataBinary(const T& element, int(*compare) (const T
     }
     return -1;
 }
+
 
 
 
